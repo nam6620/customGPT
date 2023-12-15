@@ -9,7 +9,7 @@ class ChatController {
   }
   async sendMessage(req, res) {
     const openai = new OpenAI({
-      apiKey: "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" // This is also the default, can be omitted
+      apiKey: "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" // This is also the default, can be omitted
     });
     try {
       const prompt = req.body.prompt;
