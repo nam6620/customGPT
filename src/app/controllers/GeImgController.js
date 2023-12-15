@@ -5,7 +5,7 @@ class GeImgController {
   }
   async sendMessage(req, res) {
     const openai = new OpenAI({
-      apiKey: "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"// This is also the default, can be omitted
+      apiKey: "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"// This is also the default, can be omitted
     });
     try {
       const prompt = req.body.prompt;
