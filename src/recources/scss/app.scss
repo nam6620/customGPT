@@ -1,0 +1,224 @@
+@import "variables";
+
+.left-side {
+    position: fixed;
+    background-color: $main-color;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: $left-width;
+    padding:15px 5px 0 0 ;
+}
+.header_nav{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding-left: 15px;
+    height: $header-width;
+}
+.header_nav i {
+    font-size: 15px;
+    line-height: 40px;
+    margin-left: 18px;
+}
+.body_nav{
+    background-color: $body-color;
+    width: 100%;
+    height: calc(100% - 40px);
+    padding-top: 10px;
+    border: 1px solid rgba(68, 64, 64, 0.2);
+}
+.create_bot {
+    height: 60px;
+    width: calc(100%-20px);
+    background-color: $main-color;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    margin:10px;
+    border: 1px solid rgba(68, 64, 64, 0.2);
+}
+.create_bot:hover {
+    cursor: pointer;
+}
+.create_bot i,  .create_bot h1{
+    font-size: 20px;
+    line-height: 60px;
+    margin: 0;
+}
+
+.chat_history {
+    background-color: $body-color;
+    width: 100%;
+    height: 85px;
+    border: 1px solid rgba(68, 64, 64, 0.2);
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}  
+.chat_history:hover {
+    cursor: pointer;
+}
+.chat_history_content{
+    width: calc(100% - 50px);
+    height: 100%;
+    padding: 10px;
+}
+
+.chat_history_content_header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem; 
+}
+.chat_history_content_title{
+    font-size: 2.2rem;
+}
+
+.chat_history_content_title h5 {
+    margin: 10px 0; 
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.select_chat {
+    background-color: $select-color;
+}
+
+.right-side {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: calc(100% - #{$left-width});
+    height: 100%;
+    border-left: 1px solid rgba(68, 64, 64, 0.2);
+}
+.right-side-header{
+    width: 100%;
+    height: calc(#{$header-width} + 15px);
+    background-color: $main-color;
+    display: flex;
+    justify-content: left;
+    padding: 10px;
+    border-bottom: 1px solid rgba(68, 64, 64, 0.2);
+}
+.right-side-header-content{
+    margin-left: 15px;
+}
+.right-side-header-content-title{
+    font-size: 1.3rem;
+    margin-bottom: 7px;
+}
+.right-side-body{
+    display: flex;
+    justify-content: center;
+}
+.right-side-body-center{
+    position: fixed;
+    height: 100%;
+    width: 620px;
+    top: 65px;
+}
+.right-side-body-send{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 65px;
+    align-items: center;
+}
+.input_text{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    height: 80%;
+    border: 1px solid #dcdfdf;
+    border-radius: 40px;
+    overflow: hidden;
+    padding: 0 5px;
+    align-items: center;
+}
+.right-side-body-send-icon{
+    font-size: 20px;
+    line-height: 50px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+.right-side-body-send-icon:last-child {
+    background-color: #6744cf;
+    border-radius: 50%;
+}
+.right-side-body-send-icon:hover {
+    border-radius: 50%;
+    background-color: $main-color;
+    cursor: pointer;
+}
+.input_send{
+    width: 90%;
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+}
+.right-side-body-message{
+    height: calc(90% - 65px);
+    padding: 10px;
+    overflow: auto;
+    display: block;
+}
+.right-side-body-message::-webkit-scrollbar {
+    width: 8px; /* Chiều rộng của thanh cuộn */
+  }
+  
+  .right-side-body-message::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Màu nền của vùng track */
+  }
+  
+  .right-side-body-message::-webkit-scrollbar-thumb {
+    background-color: #888; /* Màu nền của thanh cuộn */
+    border-radius: 4px; /* Bo góc của thanh cuộn */
+  }
+  
+  .right-side-body-message::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Màu nền của thanh cuộn khi hover */
+  }
+.messeage-p {
+    width: 100%;
+    display: inline-block;
+}
+.messeage-child{
+    max-width: 80%;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    margin-bottom: 20px;
+
+}
+.request{
+    float: right;
+    background-color: $main-color;
+}
+.respone{
+    float: left;
+    background-color: #5d5cde;
+}
+.file_name{
+    font-size: 16px;
+    margin-top: 10px;
+    height: 20px;
+    width: 100px;
+    align-items: center;
+    border-radius: 2px;
+    text-align: center;
+}
+.home {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+}

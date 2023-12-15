@@ -1,0 +1,132 @@
+<div class="right-side-header">
+    <div class="right-side-header-logo">
+        <img src="./img/logoChatGPT.png" alt="" style="height: 40px; border-radius: 5px">
+    </div>
+    <div class="right-side-header-content">
+        <div class="right-side-header-content-title">
+            Model: Dall-E
+        </div>
+        <div class="right-side-header-content-title">
+            <i class="fa-solid fa-shield"></i> Generate Image
+        </div>
+    </div>
+</div>
+<div class="right-side-body">
+    <div class="right-side-body-center">
+        <div class="right-side-body-message" id="chat_container">
+            {{!-- <div class="messeage request">
+                Hãy nhớ xem lại thông báo lỗi, ngăn xếp gọi hàm và mã liên quan để xác định nguyên nhân gốc của sự cố và
+                tìm ra giải pháp phù hợp.
+            </div>
+            <div class="messeage respone">
+                Hello
+            </div> --}}
+        </div>
+        <div class="right-side-body-send">
+            <div class="right-side-body-send-icon">
+                <i class="fa-solid fa-broom"></i>
+            </div>
+            <form class="input_text" id="form">
+                <input type="text" class="input_send" placeholder="Talk to Chat GPT" id="questionInput" name="prompt">
+                <div class="right-side-body-send-icon">
+                    <i class="fa-solid fa-microphone"></i>
+                </div>
+                <button style="submit" class="right-side-body-send-icon" id="button">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script>
+    const form = document.querySelector('#form')
+    const chatContainer = document.querySelector('#chat_container');
+    const theWholeConversation = [{
+        role: "assistant",
+        content: "Xin chào tôi là chat bot được làm ra bởi Phương Nam!"
+    }];
+
+
+    
+    function addMessageToConversation(role, message) {
+        theWholeConversation.push({
+            role: role,
+            content: message
+        });
+    }
+
+    
+
+    function loader(element) {
+        element.textContent = ''
+
+        loadInterval = setInterval(() => {
+            element.textContent += '.';
+
+            if (element.textContent === '....') {
+                element.textContent = '';
+            }
+        }, 300);
+    }
+
+    function typeText(element, text) {
+        console.log(text);
+        element.innerHTML = `<img src="${text}" alt="Mô tả hình ảnh">`;
+    }
+
+
+    function generateUniqueId() {
+        const timestamp = Date.now();
+        const randomNumber = Math.random();
+        const hexadecimalString = randomNumber.toString(16);
+        return `id-${timestamp}-${hexadecimalString}`;
+    }
+
+    function chatStripe(isAi, value, uniqueId) {
+        return (
+            `
+                <div class="messeage-p" >
+                    <div class="messeage-child ${isAi ? 'respone' : 'request'}" id=${uniqueId}> ${value}</div>
+                </div>
+            `
+        )
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const data = new FormData(form)
+        chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
+        form.reset()
+        const uniqueId = generateUniqueId()
+        chatContainer.innerHTML += chatStripe(true, " ", uniqueId)
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        const messageDiv = document.getElementById(uniqueId)
+        loader(messageDiv)
+        const response = await fetch(`http://localhost:3000/generateImg/sendms`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                prompt: data.get('prompt')
+            })
+        });
+
+
+        clearInterval(loadInterval)
+        messageDiv.innerHTML = " "
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            const parsedData = data.bot
+            typeText(messageDiv, parsedData)
+        } else {
+            const err = await response.text()
+            messageDiv.innerHTML = "Something went wrong"
+            alert(err)
+        }
+    }
+    form.addEventListener('submit', handleSubmit)
+</script>
